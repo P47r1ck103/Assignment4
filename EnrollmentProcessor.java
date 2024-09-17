@@ -9,12 +9,12 @@ public class EnrollmentProcessor {
 	
 	public static void main(String[] args) {
 		String masterFile = "student-master-list.csv";
-		List<Student> course1 = new ArrayList<>();
-		List<Student> course2 = new ArrayList<>();
-		List<Student> course3 = new ArrayList<>();
+		student[] course1 = new ArrayList<>();
+		student[] course2 = new ArrayList<>();
+		student[] course3 = new ArrayList<>();
 
 // 1. read the master csv file and split student by course
-	try(BufferedReader bufferedReader = new BufferedReader(new FileReader(masterFile))) {
+	try(BufferedReader bufferedReader = new BufferedReader(new FileReader(student-master-list.c))) {
 		String line;
 		boolean firstLine = true;
 		while ((line = bufferedReader.readLine()) != null) {
