@@ -9,9 +9,11 @@ public class EnrollmentProcessor {
 	
 	public static void main(String[] args) {
 		String masterFile = "student-master-list.csv";
-		student[] course1 = new ArrayList<>();
-		student[] course2 = new ArrayList<>();
-		student[] course3 = new ArrayList<>();
+		Student[] course1 = new Student[100];
+		Student[] course2 = new Student[100];
+		Student[] course3 = new Student[100];
+		
+		int count1 = 0, count2 = 0, count3 = 0;
 
 // 1. read the master csv file and split student by course
 	try(BufferedReader bufferedReader = new BufferedReader(new FileReader(student-master-list.c))) {
@@ -31,11 +33,11 @@ public class EnrollmentProcessor {
 			Student student = new Student();
 			// insert the students into the respective course in sorted order
 			if (course.startsWith("COMPSCI")) {
-				course1.add(student);
+				course1[count1++] = student;
 			} else if (course.startsWith("APMTH")) {
-				course2.add(student);
+				course2[count2++] = student;
 			} else if (course.startsWith("STAT")) {
-				course3.add(student);
+				course3[count3++] = student;
 			}
 		}
 	}catch(IOException e) {
@@ -44,21 +46,28 @@ public class EnrollmentProcessor {
 	}
 
 // sort the students by grade in descending order
-	sortStudentByCourse(course1);
-	sortStudentByCourse(course2);
-	sortStudentByCourse(course3);
+	sortStudentByCourse(course1, count1);
+	sortStudentByCourse(course2, count2);
+	sortStudentByCourse(course3, count3);
 	
 // write the sorted students into seperate csv files
-	writeToFile("course1.csv", course1);
-	writeToFile("course2.csv", course2);
-	writeToFile("course3.csv", course3);
+	writeToFile("course1.csv", course1, count1);
+	writeToFile("course2.csv", course2, count2);
+	writeToFile("course3.csv", course3, count3);
 	}
 	
 	
 private static void sortStudentByCourse(List<Student> course1) {
-	
-		
-	}
+	for (int i = 0; i < count - i - 1; i++) {
+		for (int j =0; j < count - i - 1; j++) {
+			if (students[j].getGrade() < students) [j + 1].getGrade()){
+				Student temp = students[j];
+				students[j] = student[j + 1];
+				students[j + 1] = temp;
+			}
+		}
+	}		
+}
 
 
 private static void sortStudentsByGrade(List<Student> students, int i) {
@@ -80,16 +89,16 @@ private static void sortStudentsByGrade(List<Student> students, int i) {
 	students.add(i, newStudent);
 	}
 // method to write list of students to a file
-private static void writeToFile(String fileName, List<Student> students) {
+private static void writeToFile(String fileName, Student[] students, int count) {
 	try (FileWriter Writer = new FileWriter(fileName)){
 		Writer.write("Student ID, Student Name, Course, Grade\n");
-		for (Student student : students) {
-			Writer.write(student.getStudentId() + "," + student.getStudentName() + student.getCourse() + "," + student.getGrade() + "\n");
+		for (int i = 0; i < count; i++) {
+			Writer.write(students[i].toString() + "\n");
+			}
+		}catch (IOException e) {
+			e.printStackTrace();
 		}
-	}catch (IOException e) {
-		e.printStackTrace();
-	}
-
 }
+
 
 }
